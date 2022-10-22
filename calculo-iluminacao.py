@@ -67,3 +67,32 @@ def calcula_indice_local_tabela():
             posicao_menor_diferenca = lista_indicetabela_indiceexato_diferenca.index(menor_diferenca)
         lista_indicetabela_menor_diferenca.append(lista_indices_tabela[posicao_menor_diferenca])
     return lista_indicetabela_menor_diferenca
+
+
+def descobre_refletancia():
+    lista_indice_refletancia = []
+    for _ in range(qtd_ambientes):
+        cor_teto = lista_ambientes[_]['cor_teto']
+        cor_parede = lista_ambientes[_]['cor_parede']
+        refletancia_teto = 'vazio'
+        refletancia_parede = 'vazio' 
+        refletancia_piso = '1' 
+        
+        if cor_teto in 'bB':
+            refletancia_teto = '7'
+        elif cor_teto in 'cC':
+            refletancia_teto = '5'
+        elif cor_teto in 'eE':
+            refletancia_teto = '3'
+        
+        if cor_parede in 'bB':
+            refletancia_parede = '5'
+        elif cor_parede in 'cC':
+            refletancia_parede = '3'
+        elif cor_parede in 'eE':
+            refletancia_parede = '1'
+        
+        indice_refletancia = refletancia_teto, refletancia_parede, refletancia_piso
+        indice_refletancia = ''.join(indice_refletancia)
+        lista_indice_refletancia.append(indice_refletancia)
+    return lista_indice_refletancia
