@@ -133,3 +133,20 @@ def calcula_qtd_luminarias():
         qtd_luminarias = round(lista_total_lumens[_] / lumens_por_luminaria)
         lista_qtd_luminarias.append(qtd_luminarias)
     return lista_qtd_luminarias
+
+
+def compra():
+    lista_qtd_lum = calcula_qtd_luminarias()
+    for _ in range(qtd_ambientes):
+        if lista_ambientes[_]['tipo_ambiente'] in 'bB':
+            ambiente = 'Banheiro:'
+        elif lista_ambientes[_]['tipo_ambiente'] in 'cC':
+            ambiente = 'Copa:'
+        elif lista_ambientes[_]['tipo_ambiente'] in 'reuREU':
+            ambiente = 'Sala de reunião:'
+        elif lista_ambientes[_]['tipo_ambiente'] in 'tT':
+            ambiente = 'Sala de trabalho:'
+        elif lista_ambientes[_]['tipo_ambiente'] in 'recREC':
+            ambiente = 'Recepção:'
+        print(ambiente, lista_qtd_lum[_], 'lumunárias')
+compra()
