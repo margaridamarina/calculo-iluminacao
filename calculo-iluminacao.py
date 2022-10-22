@@ -110,3 +110,14 @@ def descobre_fator_utilizacao(lista_itabela_menor_dif, lista_irefletancia):
             lista_fatores_utilizacao.append(fator_utilizacao)
     return lista_fatores_utilizacao
     
+
+def calcula_total_lumens(lista_iluminancia_rec, lista_areas, lista_fator_utiliz):
+    lista_total_lumens = []
+    for _ in range(qtd_ambientes):
+        iluminancia_recomendada = int(lista_iluminancia_rec[_])
+        area_ambiente = float(lista_areas[_])
+        fator_utilizacao_luminaria = float(lista_fator_utiliz[_])
+        fator_depreciacao_luminaria = 0.85
+        total_lumens = (iluminancia_recomendada * area_ambiente) / (fator_utilizacao_luminaria * fator_depreciacao_luminaria)
+        lista_total_lumens.append(total_lumens)
+    return lista_total_lumens
