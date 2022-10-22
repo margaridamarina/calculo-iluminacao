@@ -16,3 +16,17 @@ for _ in range(qtd_ambientes):
     info_ambiente['lumens_por_luminaria'] = input('Quantos lumens possui cada luminaria? ')
     lista_ambientes.append(info_ambiente)
     print('~~~~')
+
+
+def descobre_iluminancia_recomendada():
+    lista_iluminancia_recomendada = []
+    for _ in range(qtd_ambientes):
+        tipo_ambiente = (lista_ambientes[_]['tipo_ambiente'])
+        if tipo_ambiente in 'bB':
+            iluminancia_recomendada = 200
+        elif tipo_ambiente in 'cC' or tipo_ambiente in 'reuREU' or tipo_ambiente in 'tT':
+            iluminancia_recomendada = 500
+        elif tipo_ambiente in 'recREC':
+            iluminancia_recomendada = 300
+        lista_iluminancia_recomendada.append(iluminancia_recomendada)
+    return lista_iluminancia_recomendada  
