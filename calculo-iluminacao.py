@@ -40,3 +40,15 @@ def calcula_area_ambiente(lista_ambientes):
         area_ambiente = (comprimento * largura)
         lista_areas_ambientes.append(area_ambiente)
     return lista_areas_ambientes
+
+
+def calcula_indice_local_exato():
+    calcula_area_ambiente(lista_ambientes)
+    lista_indices_exatos = []
+    for _ in range(qtd_ambientes):
+        comprimento = float(lista_ambientes[_]['comprimento'])
+        largura = float(lista_ambientes[_]['largura'])
+        altura_trabalho = float(lista_ambientes[_]['altura_trabalho'])
+        indice_exato = (comprimento * largura / ((comprimento + largura) * altura_trabalho))
+        lista_indices_exatos.append(indice_exato)
+    return lista_indices_exatos
