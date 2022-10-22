@@ -30,3 +30,13 @@ def descobre_iluminancia_recomendada():
             iluminancia_recomendada = 300
         lista_iluminancia_recomendada.append(iluminancia_recomendada)
     return lista_iluminancia_recomendada  
+
+    
+def calcula_area_ambiente(lista_ambientes):
+    lista_areas_ambientes = []
+    for _ in range(qtd_ambientes):
+        comprimento = float(lista_ambientes[_]['comprimento'])
+        largura = float(lista_ambientes[_]['largura'])
+        area_ambiente = (comprimento * largura)
+        lista_areas_ambientes.append(area_ambiente)
+    return lista_areas_ambientes
