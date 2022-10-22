@@ -20,8 +20,8 @@ for _ in range(qtd_ambientes):
 
 def descobre_iluminancia_recomendada():
     lista_iluminancia_recomendada = []
-    for _ in range(qtd_ambientes):
-        tipo_ambiente = (lista_ambientes[_]['tipo_ambiente'])
+    for i in range(qtd_ambientes):
+        tipo_ambiente = (lista_ambientes[i]['tipo_ambiente'])
         if tipo_ambiente in 'bB':
             iluminancia_recomendada = 200
         elif tipo_ambiente in 'cC' or tipo_ambiente in 'reuREU' or tipo_ambiente in 'tT':
@@ -34,9 +34,9 @@ def descobre_iluminancia_recomendada():
     
 def calcula_area_ambiente(lista_ambientes):
     lista_areas_ambientes = []
-    for _ in range(qtd_ambientes):
-        comprimento = float(lista_ambientes[_]['comprimento'])
-        largura = float(lista_ambientes[_]['largura'])
+    for i in range(qtd_ambientes):
+        comprimento = float(lista_ambientes[i]['comprimento'])
+        largura = float(lista_ambientes[i]['largura'])
         area_ambiente = (comprimento * largura)
         lista_areas_ambientes.append(area_ambiente)
     return lista_areas_ambientes
@@ -45,10 +45,10 @@ def calcula_area_ambiente(lista_ambientes):
 def calcula_indice_local_exato():
     calcula_area_ambiente(lista_ambientes)
     lista_indices_exatos = []
-    for _ in range(qtd_ambientes):
-        comprimento = float(lista_ambientes[_]['comprimento'])
-        largura = float(lista_ambientes[_]['largura'])
-        altura_trabalho = float(lista_ambientes[_]['altura_trabalho'])
+    for i in range(qtd_ambientes):
+        comprimento = float(lista_ambientes[i]['comprimento'])
+        largura = float(lista_ambientes[i]['largura'])
+        altura_trabalho = float(lista_ambientes[i]['altura_trabalho'])
         indice_exato = (comprimento * largura / ((comprimento + largura) * altura_trabalho))
         lista_indices_exatos.append(indice_exato)
     return lista_indices_exatos
@@ -71,9 +71,9 @@ def calcula_indice_local_tabela():
 
 def descobre_refletancia():
     lista_indice_refletancia = []
-    for _ in range(qtd_ambientes):
-        cor_teto = lista_ambientes[_]['cor_teto']
-        cor_parede = lista_ambientes[_]['cor_parede']
+    for i in range(qtd_ambientes):
+        cor_teto = lista_ambientes[i]['cor_teto']
+        cor_parede = lista_ambientes[i]['cor_parede']
         refletancia_teto = 'vazio'
         refletancia_parede = 'vazio' 
         refletancia_piso = '1' 
@@ -113,10 +113,10 @@ def descobre_fator_utilizacao(lista_itabela_menor_dif, lista_irefletancia):
 
 def calcula_total_lumens(lista_iluminancia_rec, lista_areas, lista_fator_utiliz):
     lista_total_lumens = []
-    for _ in range(qtd_ambientes):
-        iluminancia_recomendada = int(lista_iluminancia_rec[_])
-        area_ambiente = float(lista_areas[_])
-        fator_utilizacao_luminaria = float(lista_fator_utiliz[_])
+    for i in range(qtd_ambientes):
+        iluminancia_recomendada = int(lista_iluminancia_rec[i])
+        area_ambiente = float(lista_areas[i])
+        fator_utilizacao_luminaria = float(lista_fator_utiliz[i])
         fator_depreciacao_luminaria = 0.85
         total_lumens = (iluminancia_recomendada * area_ambiente) / (fator_utilizacao_luminaria * fator_depreciacao_luminaria)
         lista_total_lumens.append(total_lumens)
@@ -127,26 +127,26 @@ def calcula_qtd_luminarias():
     lista_total_lumens = calcula_total_lumens(descobre_iluminancia_recomendada(), calcula_area_ambiente(lista_ambientes), descobre_fator_utilizacao(calcula_indice_local_tabela(), descobre_refletancia()))
     lista_qtd_luminarias = []
     lista_lumens_por_luminaria = []
-    for _ in range(qtd_ambientes):
-        lumens_por_luminaria = int(lista_ambientes[_]['lumens_por_luminaria'])
+    for i in range(qtd_ambientes):
+        lumens_por_luminaria = int(lista_ambientes[i]['lumens_por_luminaria'])
         lista_lumens_por_luminaria.append(lumens_por_luminaria)
-        qtd_luminarias = round(lista_total_lumens[_] / lumens_por_luminaria)
+        qtd_luminarias = round(lista_total_lumens[i] / lumens_por_luminaria)
         lista_qtd_luminarias.append(qtd_luminarias)
     return lista_qtd_luminarias
 
 
 def compra():
     lista_qtd_lum = calcula_qtd_luminarias()
-    for _ in range(qtd_ambientes):
-        if lista_ambientes[_]['tipo_ambiente'] in 'bB':
+    for i in range(qtd_ambientes):
+        if lista_ambientes[i]['tipo_ambiente'] in 'bB':
             ambiente = 'Banheiro:'
-        elif lista_ambientes[_]['tipo_ambiente'] in 'cC':
+        elif lista_ambientes[i]['tipo_ambiente'] in 'cC':
             ambiente = 'Copa:'
-        elif lista_ambientes[_]['tipo_ambiente'] in 'reuREU':
+        elif lista_ambientes[i]['tipo_ambiente'] in 'reuREU':
             ambiente = 'Sala de reunião:'
-        elif lista_ambientes[_]['tipo_ambiente'] in 'tT':
+        elif lista_ambientes[i]['tipo_ambiente'] in 'tT':
             ambiente = 'Sala de trabalho:'
-        elif lista_ambientes[_]['tipo_ambiente'] in 'recREC':
+        elif lista_ambientes[i]['tipo_ambiente'] in 'recREC':
             ambiente = 'Recepção:'
-        print(ambiente, lista_qtd_lum[_], 'luminárias')
+        print(ambiente, lista_qtd_lum[i], 'luminárias')
 compra()
