@@ -52,3 +52,18 @@ def calcula_indice_local_exato():
         indice_exato = (comprimento * largura / ((comprimento + largura) * altura_trabalho))
         lista_indices_exatos.append(indice_exato)
     return lista_indices_exatos
+
+
+def calcula_indice_local_tabela():
+    lista_indices_exatos = calcula_indice_local_exato()
+    lista_indices_tabela = [0.6, 0.8, 1, 1.25, 1.5, 2, 2.5, 3, 4, 5]
+    lista_indicetabela_indiceexato_diferenca = []
+    lista_indicetabela_menor_diferenca = []
+    for indice_exato in lista_indices_exatos:
+        for indice_tabela in lista_indices_tabela:
+            indicetabela_indiceexato_diferenca = abs(indice_tabela - indice_exato)
+            lista_indicetabela_indiceexato_diferenca.append(indicetabela_indiceexato_diferenca)
+            menor_diferenca = min(lista_indicetabela_indiceexato_diferenca)
+            posicao_menor_diferenca = lista_indicetabela_indiceexato_diferenca.index(menor_diferenca)
+        lista_indicetabela_menor_diferenca.append(lista_indices_tabela[posicao_menor_diferenca])
+    return lista_indicetabela_menor_diferenca
