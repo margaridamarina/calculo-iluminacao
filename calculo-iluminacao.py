@@ -96,3 +96,17 @@ def descobre_refletancia():
         indice_refletancia = ''.join(indice_refletancia)
         lista_indice_refletancia.append(indice_refletancia)
     return lista_indice_refletancia
+
+
+def descobre_fator_utilizacao(lista_itabela_menor_dif, lista_irefletancia):
+arquivo = open('fator_utilizacao_tcs029_32w.csv')
+arquivo_lido = list(csv.DictReader(arquivo))
+lista_fatores_utilizacao = []
+for (i, indice_tabela) in enumerate(lista_itabela_menor_dif):
+    for linha_fator_utilizacao in arquivo_lido:
+    refletancia = lista_irefletancia[i]
+    if float(linha_fator_utilizacao['K']) == indice_tabela:
+        fator_utilizacao = linha_fator_utilizacao[str(refletancia)]
+        lista_fatores_utilizacao.append(fator_utilizacao)
+return lista_fatores_utilizacao
+    
