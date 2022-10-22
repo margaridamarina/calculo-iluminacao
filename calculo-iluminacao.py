@@ -148,5 +148,5 @@ def compra():
             ambiente = 'Sala de trabalho:'
         elif lista_ambientes[_]['tipo_ambiente'] in 'recREC':
             ambiente = 'Recepção:'
-        print(ambiente, lista_qtd_lum[_], 'lumunárias')
+        print(ambiente, lista_qtd_lum[_], 'luminárias')
 compra()
