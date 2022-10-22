@@ -121,3 +121,15 @@ def calcula_total_lumens(lista_iluminancia_rec, lista_areas, lista_fator_utiliz)
         total_lumens = (iluminancia_recomendada * area_ambiente) / (fator_utilizacao_luminaria * fator_depreciacao_luminaria)
         lista_total_lumens.append(total_lumens)
     return lista_total_lumens
+
+
+def calcula_qtd_luminarias():
+    lista_total_lumens = calcula_total_lumens(descobre_iluminancia_recomendada(), calcula_area_ambiente(lista_ambientes), descobre_fator_utilizacao(calcula_indice_local_tabela(), descobre_refletancia()))
+    lista_qtd_luminarias = []
+    lista_lumens_por_luminaria = []
+    for _ in range(qtd_ambientes):
+        lumens_por_luminaria = int(lista_ambientes[_]['lumens_por_luminaria'])
+        lista_lumens_por_luminaria.append(lumens_por_luminaria)
+        qtd_luminarias = round(lista_total_lumens[_] / lumens_por_luminaria)
+        lista_qtd_luminarias.append(qtd_luminarias)
+    return lista_qtd_luminarias
