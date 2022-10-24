@@ -3,16 +3,16 @@ import csv
 
 class Ambiente:
     largura = 0
-    altura = 0
+    distancia_mesa_luminaria = 0
     comprimento = 0
     lumen_luminaria = 0
     tipo_ambiente = ''
     cor_teto = ''
     cor_parede = ''
 
-    def __init__(self, largura = 0, altura = 0, comprimento = 0, lumen_luminaria = 0, cor_teto = '', cor_parede = '', tipo_ambiente=''):
+    def __init__(self, largura = 0, distancia_mesa_luminaria = 0, comprimento = 0, lumen_luminaria = 0, cor_teto = '', cor_parede = '', tipo_ambiente=''):
         self.largura = largura
-        self.altura = altura
+        self.distancia_mesa_luminaria = distancia_mesa_luminaria
         self.lumen_luminaria = lumen_luminaria
         self.cor_teto = cor_teto
         self.cor_parede = cor_parede
@@ -37,8 +37,8 @@ class Ambiente:
     def calcula_indice_local_exato(self):
         comprimento = float(self.comprimento)
         largura = float(self.largura)
-        altura = float(self.altura)
-        indice_exato = (comprimento * largura / ((comprimento + largura) * altura))
+        distancia_mesa_luminaria = float(self.distancia_mesa_luminaria)
+        indice_exato = (comprimento * largura / ((comprimento + largura) * distancia_mesa_luminaria))
         return indice_exato
 
     def calcula_indice_local_tabela(self):
@@ -113,7 +113,7 @@ if __name__=='__main__':
         
         ambiente.comprimento = float(input('Qual o comprimento do ambiente? '))
         ambiente.largura = float(input('Qual a largura do ambiente? '))
-        ambiente.altura = float(input('Qual a altura de trabalho (altura da mesa ou da bancada)? '))
+        ambiente.distancia_mesa_luminaria = float(input('Qual a distancia entre a área de trabalho (mesa ou bancada) e a luminária? '))
         ambiente.cor_teto = input('Qual a cor do teto no ambiente (B para branco, C para claro, E para escuro)? ')
         ambiente.cor_parede = input('Qual a cor da parede no ambiente (B para branca, C para clara, E para escura)? ')
         ambiente.tipo_ambiente = input('Qual o tipo de ambiente (B para banheiro, C para copa, REU para sala de reuniao, T para sala de trabalho, REC para recepcao)? ')
