@@ -10,6 +10,7 @@ class Ambiente:
     cor_teto = ''
     cor_parede = ''
 
+
     def __init__(self, largura = 0, distancia_mesa_luminaria = 0, comprimento = 0, lumen_luminaria = 0, cor_teto = '', cor_parede = '', tipo_ambiente=''):
         self.largura = largura
         self.distancia_mesa_luminaria = distancia_mesa_luminaria
@@ -18,6 +19,7 @@ class Ambiente:
         self.cor_parede = cor_parede
         self.tipo_ambiente = tipo_ambiente
         self.comprimento = comprimento
+
 
     def descobre_iluminancia_recomendada(self):
         tipo_ambiente = self.tipo_ambiente
@@ -29,10 +31,12 @@ class Ambiente:
             iluminancia_recomendada = 300
         return iluminancia_recomendada
 
+
     def calcula_area_ambiente(self):
         comprimento = float(self.comprimento)
         largura = float(self.largura)
         return (comprimento * largura)
+
 
     def calcula_indice_local_exato(self):
         comprimento = float(self.comprimento)
@@ -41,18 +45,18 @@ class Ambiente:
         indice_exato = (comprimento * largura / ((comprimento + largura) * distancia_mesa_luminaria))
         return indice_exato
 
+
     def calcula_indice_local_tabela(self):
         indice_exato = self.calcula_indice_local_exato()
         lista_indices_tabela = [0.6, 0.8, 1, 1.25, 1.5, 2, 2.5, 3, 4, 5]
         lista_indicetabela_indiceexato_diferenca = []
-
         for indice_tabela in lista_indices_tabela:
             indicetabela_indiceexato_diferenca = abs(indice_tabela - indice_exato)
             lista_indicetabela_indiceexato_diferenca.append(indicetabela_indiceexato_diferenca)
             menor_diferenca = min(lista_indicetabela_indiceexato_diferenca)
             posicao_menor_diferenca = lista_indicetabela_indiceexato_diferenca.index(menor_diferenca)
-
         return lista_indices_tabela[posicao_menor_diferenca]
+
 
     def descobre_refletancia(self):
         cor_teto = self.cor_teto
@@ -79,18 +83,18 @@ class Ambiente:
         indice_refletancia = ''.join(indice_refletancia)
         return indice_refletancia
 
+
     def descobre_fator_utilizacao(self):
         indice_tabela = self.calcula_indice_local_tabela()
         refletancia = self.descobre_refletancia()
-
         arquivo = open('fator_utilizacao_tcs029_32w.csv')
         arquivo_lido = list(csv.DictReader(arquivo))
         arquivo.close()
-
         for linha_fator_utilizacao in arquivo_lido:
             if float(linha_fator_utilizacao['K']) == indice_tabela:
                 fator_utilizacao = linha_fator_utilizacao[str(refletancia)]
                 return fator_utilizacao
+
 
     def calcula_total_lumens(self):
         iluminancia_recomendada = self.descobre_iluminancia_recomendada()
@@ -98,6 +102,7 @@ class Ambiente:
         fator_utilizacao_luminaria = float(self.descobre_fator_utilizacao())
         fator_depreciacao_luminaria = 0.85
         return (iluminancia_recomendada * area_ambiente) / (fator_utilizacao_luminaria * fator_depreciacao_luminaria)
+
 
     def calcula_qtd_luminarias(self):
         total_lumens = self.calcula_total_lumens()
@@ -107,10 +112,8 @@ class Ambiente:
 
 if __name__=='__main__':
     qtd_ambientes = int(input('Quantos ambientes deseja informar? '))
-
     for _ in range(qtd_ambientes):
         ambiente = Ambiente()
-        
         ambiente.comprimento = float(input('Qual o comprimento do ambiente? '))
         ambiente.largura = float(input('Qual a largura do ambiente? '))
         ambiente.distancia_mesa_luminaria = float(input('Qual a distancia entre a área de trabalho (mesa ou bancada) e a luminária? '))
@@ -118,10 +121,10 @@ if __name__=='__main__':
         ambiente.cor_parede = input('Qual a cor da parede no ambiente (B para branca, C para clara, E para escura)? ')
         ambiente.tipo_ambiente = input('Qual o tipo de ambiente (B para banheiro, C para copa, REU para sala de reuniao, T para sala de trabalho, REC para recepcao)? ')
         ambiente.lumen_luminaria = int(input('Quantos lumens possui cada luminaria? '))
-
         print('~~~~')
 
         lista_qtd_lum = ambiente.calcula_qtd_luminarias()
+
         if ambiente.tipo_ambiente in 'bB':
             nome_ambiente = 'Banheiro:'
         elif ambiente.tipo_ambiente in 'cC':
@@ -132,6 +135,6 @@ if __name__=='__main__':
             nome_ambiente = 'Sala de trabalho:'
         elif ambiente.tipo_ambiente in 'recREC':
             nome_ambiente = 'Recepção:'
-
+            
         print(nome_ambiente, lista_qtd_lum, 'luminárias\n\n')
 
