@@ -18,7 +18,7 @@ for _ in range(qtd_ambientes):
     print('~~~~')
 
 
-def descobre_iluminancia_recomendada():
+def descobre_iluminancia_recomendada(lista_ambientes):
     lista_iluminancia_recomendada = []
     for ambiente in lista_ambientes:
         tipo_ambiente = (ambiente['tipo_ambiente'])
@@ -42,7 +42,7 @@ def calcula_area_ambiente(lista_ambientes):
     return lista_areas_ambientes
 
 
-def calcula_indice_local_exato():
+def calcula_indice_local_exato(lista_ambientes):
     lista_indices_exatos = []
     for ambiente in lista_ambientes:
         comprimento = float(ambiente['comprimento'])
@@ -53,8 +53,8 @@ def calcula_indice_local_exato():
     return lista_indices_exatos
 
 
-def calcula_indice_local_tabela():
-    lista_indices_exatos = calcula_indice_local_exato()
+def calcula_indice_local_tabela(lista_ambientes):
+    lista_indices_exatos = calcula_indice_local_exato(lista_ambientes)
     lista_indices_tabela = [0.6, 0.8, 1, 1.25, 1.5, 2, 2.5, 3, 4, 5]
     lista_indicetabela_indiceexato_diferenca = []
     lista_indicetabela_menor_diferenca = []
@@ -123,7 +123,10 @@ def calcula_total_lumens(lista_iluminancia_rec, lista_areas, lista_fator_utiliz)
 
 
 def calcula_qtd_luminarias():
-    lista_total_lumens = calcula_total_lumens(descobre_iluminancia_recomendada(), calcula_area_ambiente(lista_ambientes), descobre_fator_utilizacao(calcula_indice_local_tabela(), descobre_refletancia()))
+    iluminancia_recomendada = descobre_iluminancia_recomendada(lista_ambientes)
+    area_ambiente = calcula_area_ambiente(lista_ambientes)
+    fator_utilizaca = descobre_fator_utilizacao(calcula_indice_local_tabela(lista_ambientes), descobre_refletancia())
+    lista_total_lumens = calcula_total_lumens(iluminancia_recomendada, area_ambiente, fator_utilizaca)    
     lista_qtd_luminarias = []
     lista_lumens_por_luminaria = []
     for i in range(qtd_ambientes):
