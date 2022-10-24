@@ -20,8 +20,8 @@ for _ in range(qtd_ambientes):
 
 def descobre_iluminancia_recomendada():
     lista_iluminancia_recomendada = []
-    for i in range(qtd_ambientes):
-        tipo_ambiente = (lista_ambientes[i]['tipo_ambiente'])
+    for ambiente in lista_ambientes:
+        tipo_ambiente = (ambiente['tipo_ambiente'])
         if tipo_ambiente in 'bB':
             iluminancia_recomendada = 200
         elif tipo_ambiente in 'cC' or tipo_ambiente in 'reuREU' or tipo_ambiente in 'tT':
@@ -34,9 +34,9 @@ def descobre_iluminancia_recomendada():
     
 def calcula_area_ambiente(lista_ambientes):
     lista_areas_ambientes = []
-    for i in range(qtd_ambientes):
-        comprimento = float(lista_ambientes[i]['comprimento'])
-        largura = float(lista_ambientes[i]['largura'])
+    for ambiente in lista_ambientes:
+        comprimento = float(ambiente['comprimento'])
+        largura = float(ambiente['largura'])
         area_ambiente = (comprimento * largura)
         lista_areas_ambientes.append(area_ambiente)
     return lista_areas_ambientes
@@ -44,10 +44,10 @@ def calcula_area_ambiente(lista_ambientes):
 
 def calcula_indice_local_exato():
     lista_indices_exatos = []
-    for i in range(qtd_ambientes):
-        comprimento = float(lista_ambientes[i]['comprimento'])
-        largura = float(lista_ambientes[i]['largura'])
-        altura_trabalho = float(lista_ambientes[i]['altura_trabalho'])
+    for ambiente in lista_ambientes:
+        comprimento = float(ambiente['comprimento'])
+        largura = float(ambiente['largura'])
+        altura_trabalho = float(ambiente['altura_trabalho'])
         indice_exato = (comprimento * largura / ((comprimento + largura) * altura_trabalho))
         lista_indices_exatos.append(indice_exato)
     return lista_indices_exatos
@@ -70,9 +70,9 @@ def calcula_indice_local_tabela():
 
 def descobre_refletancia():
     lista_indice_refletancia = []
-    for i in range(qtd_ambientes):
-        cor_teto = lista_ambientes[i]['cor_teto']
-        cor_parede = lista_ambientes[i]['cor_parede']
+    for ambiente in lista_ambientes:
+        cor_teto = ambiente['cor_teto']
+        cor_parede = ambiente['cor_parede']
         refletancia_teto = ''
         refletancia_parede = '' 
         refletancia_piso = '1' 
