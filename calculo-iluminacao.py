@@ -1,23 +1,6 @@
 import csv
 
 
-qtd_ambientes = int(input('Quantos ambientes deseja informar? '))
-
-
-lista_ambientes = []
-for _ in range(qtd_ambientes):
-    info_ambiente = {}
-    info_ambiente['comprimento'] = input('Qual o comprimento do ambiente? ')
-    info_ambiente['largura'] = input('Qual a largura do ambiente? ')
-    info_ambiente['altura_trabalho'] = input('Qual a altura de trabalho (altura da mesa ou da bancada)? ')
-    info_ambiente['cor_teto'] = input('Qual a cor do teto no ambiente (B para branco, C para claro, E para escuro)? ')
-    info_ambiente['cor_parede'] = input('Qual a cor da parede no ambiente (B para branca, C para clara, E para escura)? ')
-    info_ambiente['tipo_ambiente'] = input('Qual o tipo de ambiente (B para banheiro, C para copa, REU para sala de reuniao, T para sala de trabalho, REC para recepcao)? ')
-    info_ambiente['lumens_por_luminaria'] = input('Quantos lumens possui cada luminaria? ')
-    lista_ambientes.append(info_ambiente)
-    print('~~~~')
-
-
 def descobre_iluminancia_recomendada(lista_ambientes):
     lista_iluminancia_recomendada = []
     for ambiente in lista_ambientes:
@@ -122,7 +105,7 @@ def calcula_total_lumens(lista_iluminancia_rec, lista_areas, lista_fator_utiliz)
     return lista_total_lumens
 
 
-def calcula_qtd_luminarias():
+def calcula_qtd_luminarias(lista_ambientes):
     iluminancia_recomendada = descobre_iluminancia_recomendada(lista_ambientes)
     area_ambiente = calcula_area_ambiente(lista_ambientes)
     fator_utilizaca = descobre_fator_utilizacao(calcula_indice_local_tabela(lista_ambientes), descobre_refletancia())
@@ -137,8 +120,21 @@ def calcula_qtd_luminarias():
     return lista_qtd_luminarias
 
 
-def compra():
-    lista_qtd_lum = calcula_qtd_luminarias()
+if __name__=='__main__':
+    qtd_ambientes = int(input('Quantos ambientes deseja informar? '))
+    lista_ambientes = []
+    for _ in range(qtd_ambientes):
+        info_ambiente = {}
+        info_ambiente['comprimento'] = input('Qual o comprimento do ambiente? ')
+        info_ambiente['largura'] = input('Qual a largura do ambiente? ')
+        info_ambiente['altura_trabalho'] = input('Qual a altura de trabalho (altura da mesa ou da bancada)? ')
+        info_ambiente['cor_teto'] = input('Qual a cor do teto no ambiente (B para branco, C para claro, E para escuro)? ')
+        info_ambiente['cor_parede'] = input('Qual a cor da parede no ambiente (B para branca, C para clara, E para escura)? ')
+        info_ambiente['tipo_ambiente'] = input('Qual o tipo de ambiente (B para banheiro, C para copa, REU para sala de reuniao, T para sala de trabalho, REC para recepcao)? ')
+        info_ambiente['lumens_por_luminaria'] = input('Quantos lumens possui cada luminaria? ')
+        lista_ambientes.append(info_ambiente)
+        print('~~~~')
+    lista_qtd_lum = calcula_qtd_luminarias(lista_ambientes)
     for i in range(qtd_ambientes):
         if lista_ambientes[i]['tipo_ambiente'] in 'bB':
             ambiente = 'Banheiro:'
@@ -151,4 +147,3 @@ def compra():
         elif lista_ambientes[i]['tipo_ambiente'] in 'recREC':
             ambiente = 'Recepção:'
         print(ambiente, lista_qtd_lum[i], 'luminárias')
-compra()
