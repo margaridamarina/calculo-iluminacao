@@ -43,7 +43,6 @@ def calcula_area_ambiente(lista_ambientes):
 
 
 def calcula_indice_local_exato():
-    calcula_area_ambiente(lista_ambientes)
     lista_indices_exatos = []
     for i in range(qtd_ambientes):
         comprimento = float(lista_ambientes[i]['comprimento'])
@@ -74,8 +73,8 @@ def descobre_refletancia():
     for i in range(qtd_ambientes):
         cor_teto = lista_ambientes[i]['cor_teto']
         cor_parede = lista_ambientes[i]['cor_parede']
-        refletancia_teto = 'vazio'
-        refletancia_parede = 'vazio' 
+        refletancia_teto = ''
+        refletancia_parede = '' 
         refletancia_piso = '1' 
         
         if cor_teto in 'bB':
