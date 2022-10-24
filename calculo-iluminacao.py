@@ -93,23 +93,23 @@ def descobre_fator_utilizacao(lista_itabela_menor_dif, lista_irefletancia):
     return lista_fatores_utilizacao
     
 
-def calcula_total_lumens(lista_iluminancia_rec, lista_areas, lista_fator_utiliz):
-    lista_total_lumens = []
-    for i in range(qtd_ambientes):
-        iluminancia_recomendada = int(lista_iluminancia_rec[i])
-        area_ambiente = float(lista_areas[i])
-        fator_utilizacao_luminaria = float(lista_fator_utiliz[i])
-        fator_depreciacao_luminaria = 0.85
-        total_lumens = (iluminancia_recomendada * area_ambiente) / (fator_utilizacao_luminaria * fator_depreciacao_luminaria)
-        lista_total_lumens.append(total_lumens)
-    return lista_total_lumens
+def calcula_total_lumens(iluminancia_rec, areas, fator_utiliz):
+    iluminancia_recomendada = int(iluminancia_rec)
+    area_ambiente = float(areas)
+    fator_utilizacao_luminaria = float(fator_utiliz)
+    fator_depreciacao_luminaria = 0.85
+    return (iluminancia_recomendada * area_ambiente) / (fator_utilizacao_luminaria * fator_depreciacao_luminaria)
 
 
 def calcula_qtd_luminarias(lista_ambientes):
     iluminancia_recomendada = descobre_iluminancia_recomendada(lista_ambientes)
     area_ambiente = calcula_area_ambiente(lista_ambientes)
     fator_utilizaca = descobre_fator_utilizacao(calcula_indice_local_tabela(lista_ambientes), descobre_refletancia())
-    lista_total_lumens = calcula_total_lumens(iluminancia_recomendada, area_ambiente, fator_utilizaca)    
+    # Refatorar para deixar as funcoes recebendo argumentos como valores unicos em vez de listas
+    lista_total_lumens = []
+    for i in range(len(lista_ambientes)):
+       total_lumens = calcula_total_lumens(iluminancia_recomendada[i], area_ambiente[i], fator_utilizaca[i])
+       lista_total_lumens.append(total_lumens)
     lista_qtd_luminarias = []
     lista_lumens_por_luminaria = []
     for i in range(qtd_ambientes):
